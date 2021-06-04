@@ -1,24 +1,8 @@
 # lst-hwfyh-web
 
-## Project setup
-```
-npm install
-```
+## 已经完成
+ 项目初始化
+## 进行中
+实现云端文件同步功能
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
