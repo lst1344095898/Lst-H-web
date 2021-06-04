@@ -21,5 +21,14 @@ http.interceptors.request.use(
         return Promise.reject(error)
     }
 )
-
+//响应拦截器
+http.interceptors.response.use(res=>{
+    //此处对响应数据做处理
+    //暂时不处理
+    return res //该返回对象会传到请求方法的响应对象中
+},err=>{
+    // 响应错误处理
+    console.log('响应失败！',err)
+    // return Promise.reject(err);
+})
 export default http

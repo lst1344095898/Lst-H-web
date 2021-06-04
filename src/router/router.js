@@ -4,9 +4,14 @@ import NotFound from "../view/NotFound";
 import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
-const routes = [
+const routers = [
     {
         path:'/',
+        name: 'login',
+        component: login
+    },
+    {
+        path:'/login',
         name: 'login',
         component: login
     },
@@ -20,7 +25,7 @@ const routes = [
 const router = new VueRouter({
     mode: 'history',
     base: __dirname,
-    router:routes
+    routes:routers
 })
 //将router 传入到实例对象
 //导航守卫

@@ -9,6 +9,7 @@ Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 new Vue({
+  el:'#app',
   router: router,
   render: h => h(App),
 }).$mount('#app')
