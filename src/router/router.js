@@ -2,6 +2,8 @@ import Vue from "vue";
 import login from "../view/login";
 import NotFound from "../view/NotFound";
 import VueRouter from "vue-router";
+import routerHome from "../view/routerHome";
+import synchronizeFiles from "../view/functionView/synchronizeFiles";
 
 Vue.use(VueRouter);
 const routers = [
@@ -14,6 +16,16 @@ const routers = [
         path:'/login',
         name: 'login',
         component: login
+    },
+    {
+        path: '/routerHome',
+        name: 'routerHome',
+        component: routerHome
+    },
+    {
+        path: '/synchronizeFiles',
+        name: 'synchronizeFiles',
+        component: synchronizeFiles
     },
     {
         path: '/*',
@@ -31,7 +43,7 @@ const router = new VueRouter({
 //导航守卫
 //判断是否登录
 router.beforeEach((to, from, next) => {
-    console.log('to.path=' + to.path);
+    console.log('路由跳转to.path=' + to.path);
     if (to.path === '/login' || to.path === '/register') {
         next();
     } else {
