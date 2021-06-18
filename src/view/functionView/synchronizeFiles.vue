@@ -46,12 +46,12 @@
               <template slot="header">
                 <el-button
                     style="margin-left: 22px"
-                    @click.native.prevent="uploadFile()"
+                    @click="uploadFileTrue()"
                     type="text"
                     size="small">
                   <i class="el-icon-upload2"></i>上传新文件
                 </el-button>
-                <el-input v-show="false"  id="uploadFile" type="file"/>
+                <el-input v-show="false"  id="uploadFileInput" type="file" @input="uploadFile()"/>
               </template>
               <template slot-scope="scope">
                 <el-button
@@ -79,7 +79,6 @@
 
 <script>
 import UserUtils from "../../utils/UserUtils";
-
 export default {
   name: "synchronizeFiles",
   data(){
@@ -125,63 +124,67 @@ export default {
     synchronizeFile(data){
       console.log(data.$index)
     },
+    test(){
+      console.log("触发")
+    },
     /**
      * 上传传新文件
      */
+    uploadFileTrue(){
+      let uploadFileInput = document.getElementById('uploadFileInput');
+      uploadFileInput.click();
+    },
     uploadFile(){
-      const uploadFile = document.querySelector("#uploadFile");
-      uploadFile.addEventListener("change",function (){
-        //获取选择文件
-        let file = document.querySelector("#uploadFile").files[0];
-        if (file==null){
-          this.$message({
-            showClose: true,
-            duration: 1500,
-            message: '文件为空',
-            type: 'warning',
-          });
-          return;
-        }
-        //创建formData对象
-        let formData = new FormData();
-        formData.append("file",file);
-        this.$axios({
-          method:"POST",
-          url:"file/uploadFile",
-          data: formData,
-          headers: {
-            'Content-Type':'multipart/form-data',
-            'User': UserUtils.getUser()
-          }
+      //获取选择文件
+      let file = document.getElementById('uploadFileInput').files[0];
+      if (file==null){
+        this.$message({
+          showClose: true,
+          duration: 1500,
+          message: '文件为空,不能上传',
+          type: 'success',
         })
-        .then(res=>{
-          if (res.data.code===200){
+        return;
+      }
+      //创建formData对象
+      let formData = new FormData();
+      formData.append("file",file);
+      this.$axios({
+            method:"POST",
+            url:"file/uploadFile",
+            data: formData,
+            headers: {
+              'Content-Type':'multipart/form-data',
+              'userString': JSON.stringify(UserUtils.getUser())
+            }
+          })
+          .then(res=>{
+            if (res.data.code===200){
+              this.$message({
+                showClose: true,
+                duration: 1500,
+                message: '文件上传成功',
+                type: 'success',
+              })
+            }else{
+              this.$message({
+                showClose: true,
+                duration: 1500,
+                message: '文件上传失败:未知错误',
+                type: 'warning',
+              })
+            }
+          })
+          .catch(err=>{
             this.$message({
               showClose: true,
               duration: 1500,
-              message: '文件上传成功',
-              type: 'success',
-            })
-          }else{
-            this.$message({
-              showClose: true,
-              duration: 1500,
-              message: '文件上传成功:未知错误',
+              message: '文件上传失败:系统错误,\n'+err,
               type: 'warning',
             })
-          }
-        })
-        .catch(err=>{
-          this.$message({
-            showClose: true,
-            duration: 1500,
-            message: '文件上传成功:系统错误,\n'+err,
-            type: 'warning',
           })
-        })
-      })
-    },
-  }
+    }
+  },
 }
 </script>
 <style scoped src="../../assets/css/commonCss/containerCss.css"/>
