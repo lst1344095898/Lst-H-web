@@ -1,16 +1,27 @@
 
 const UserUtils ={
     setUser:function (user){
-        localStorage.setItem('userInfo',JSON.stringify(user));
+        localStorage.setItem('hwfyh_loginUserInfo',JSON.stringify(user));
     },
     getUser:function (){
-        return JSON.parse(localStorage.getItem('userInfo'));
+        let loginUserInfo = localStorage.getItem('hwfyh_loginUserInfo')
+        if(loginUserInfo==null)
+            return null;
+        else
+            return JSON.parse(loginUserInfo);
+    },
+    removeUser: function (){
+        localStorage.removeItem('hwfyh_loginUserInfo');
     },
     setToken:function (token){
-      localStorage.setItem("token",token);
+      localStorage.setItem("hwfyh_token",token);
     },
     getToken:function (){
-        return localStorage.getItem("token")
+        return localStorage.getItem("hwfyh_token");
+    },
+    removeToken:function (){
+        return localStorage.removeItem("hwfyh_token");
     }
+
 }
 export default UserUtils

@@ -13,15 +13,13 @@ export default {
 </script>
 <style>
   body{
-    margin-top: 0;
-    margin-left: 0;
+    margin: 0;
     width: 100%;
     height: 100%;
   }
   #app{
     position: absolute;
-    margin-left: 0;
-    margin-top: 0;
+    margin: 0;
     width: 100%;
     height: 100%;
   }

@@ -12,8 +12,14 @@ const http = axios.create({
 //请求发送前拦截
 http.interceptors.request.use(
     config =>{
-        if (localStorage.getItem('token')){
+        //添加token
+        if (localStorage.getItem('hwfyh_token')){
             config.headers['token']=localStorage.getItem('token');
+        }
+        //添加loginUserInfo
+        //明码状态，后期采用加密
+        if (localStorage.getItem('hwfyh_loginUserInfo')){
+            config.headers['loginUserInfo']=encodeURIComponent(localStorage.getItem('hwfyh_loginUserInfo'))
         }
         return config;
     },

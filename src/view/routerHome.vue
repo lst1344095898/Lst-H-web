@@ -4,6 +4,24 @@
       <el-header class="router_home_head">
         <i class="el-icon-s-platform"></i>
         嘀嘀嘀
+        <el-popover
+            placement="top-start"
+            width="20"
+            trigger="click">
+            <ul class="user_info_ul">
+                <li>{{loginUserInfo.userName}}</li>
+                <li class="user_info_li_divider"></li>
+                <li><el-button type="text" class="out_sign_in_button" @click="outSignIn">退出账户</el-button></li>
+            </ul>
+            <li class="user_info_li" slot="reference">
+                <div class="user_info_left_div">
+                  <img style="width: 40px; height: 40px; margin-top: 10px"
+                          :src="loginUserInfo.headImg"
+                          />
+                  <i class="el-icon-arrow-down"></i>
+                </div>
+            </li>
+        </el-popover>
       </el-header>
       <el-container>
         <el-aside class="router_home_aside" style="width: 140px">
@@ -53,20 +71,36 @@
 </template>
 
 <script>
+import UserUtils from "../utils/UserUtils";
 export default {
   name: "RouterHome",
   data(){
     return{
+      loginUserInfo:{
+        headImg:require('../assets/img/headImg.png'),
+        userName:'',
+        sex:''
+      },
       img:{
         synchronizeFiles:{
             url:require('../assets/img/synchronizeFiles.png'),
             style: 'fill',
             words: '同步文件'
-        }
+        },
+         headImg:require('../assets/img/headImg.png'),
       }
     }
   },
   methods:{
+    /**
+     * 退出登录
+     * */
+    outSignIn(){
+        UserUtils.removeUser();
+        UserUtils.removeToken();
+        this.$router.push("/login");
+    }
+    ,
     /**
      * 跳转同步文件页面
      */
@@ -76,6 +110,17 @@ export default {
       });
       window.open(href,
           '_blank')
+    }
+  },
+  created(){
+    this.loginUserInfo=UserUtils.getUser();
+    console.log('直接返回',this.loginUserInfo);
+    console.log(this.loginUserInfo);
+    if(this.loginUserInfo.headImg == null){
+      if(this.loginUserInfo.sex==='男')
+          this.loginUserInfo['headImg']=require('../assets/img/headImgMan.png')
+      else
+          this.loginUserInfo['headImg']=require('../assets/img/headImgWoMan.png')
     }
   }
 }

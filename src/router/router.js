@@ -47,7 +47,7 @@ router.beforeEach((to, from, next) => {
     if (to.path === '/login' || to.path === '/register') {
         next();
     } else {
-        let token = localStorage.getItem("token");
+        let token = localStorage.getItem("hwfyh_token");
         if (token === null || token === '') {
             next('/login');
         } else {
