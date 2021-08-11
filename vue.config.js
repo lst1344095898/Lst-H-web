@@ -3,7 +3,7 @@ module.exports = {
         port:8011,
         proxy:{
             '/api' : {
-                target:'http://localhost:8022',
+                target:'localhost:8080/lst-hwfyh-api',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api' : ''

@@ -14,7 +14,7 @@ http.interceptors.request.use(
     config =>{
         //添加token
         if (localStorage.getItem('hwfyh_token')){
-            config.headers['token']=localStorage.getItem('token');
+            config.headers['token']=localStorage.getItem('hwfyh_token');
         }
         //添加loginUserInfo
         //明码状态，后期采用加密

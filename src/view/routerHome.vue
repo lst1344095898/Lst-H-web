@@ -77,7 +77,7 @@ export default {
   data(){
     return{
       loginUserInfo:{
-        headImg:require('../assets/img/headImg.png'),
+        headImg:require('../assets/img/headImgMan.png'),
         userName:'',
         sex:''
       },
@@ -87,7 +87,7 @@ export default {
             style: 'fill',
             words: '同步文件'
         },
-         headImg:require('../assets/img/headImg.png'),
+         headImg:require('../assets/img/headImgMan.png'),
       }
     }
   },
