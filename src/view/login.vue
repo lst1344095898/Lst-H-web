@@ -1,7 +1,10 @@
 <template>
   <div id="login_main">
     <div class="login_div">
-      <h1>用户登录</h1>
+      <h1 class="login_h1">用户登录</h1>
+      <div class="login_left_div">
+        <img src="../assets/img/login_left.png" alt="null">
+      </div>
       <div class="login_from_div">
         <el-form :label-position="leftString" label-width="80px">
           <el-form-item label="">

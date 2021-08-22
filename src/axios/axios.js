@@ -12,7 +12,7 @@ const http = axios.create({
 //请求发送前拦截
 http.interceptors.request.use(
     config =>{
-        //添加token
+        // 添加token
         if (localStorage.getItem('hwfyh_token')){
             config.headers['token']=localStorage.getItem('hwfyh_token');
         }
@@ -28,13 +28,23 @@ http.interceptors.request.use(
     }
 )
 //响应拦截器
-http.interceptors.response.use(res=>{
+http.interceptors.response.use(res => {
+    let code = res.data.code;
+    let message = res.data.message;
+    if (code === 520 || code === 521) {
+        // router.replace("/");
+        // callback: action => {
+        //     window.location.href("/login")
+        // }
+        //登录失效跳转登录页面
+        alert(message);
+    }
     //此处对响应数据做处理
     //暂时不处理
     return res //该返回对象会传到请求方法的响应对象中
-},err=>{
+}, err => {
     // 响应错误处理
-    console.log('响应失败！',err)
+    console.log('响应失败！', err)
     // return Promise.reject(err);
 })
 export default http

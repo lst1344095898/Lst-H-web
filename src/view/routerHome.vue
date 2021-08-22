@@ -105,6 +105,7 @@ export default {
      * 跳转同步文件页面
      */
     synchronizeFiles(){
+      // this.$route.
       const {href}=this.$router.resolve({
         path: '/synchronizeFiles'
       });

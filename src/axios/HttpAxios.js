@@ -6,10 +6,8 @@ const HttpAxios = {
             axios.get(url, {
                 params: formData,
             }).then(res => {
-                console.log("成功"+res.data);
                 resolve(res.data);
             }).catch(err =>{
-                console.log("失败"+err)
                 reject(err.data)
             })
         });
