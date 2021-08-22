@@ -5,8 +5,7 @@ body{
     position: absolute;
     top: 0;
     left: 0;
-    background-color: black;
-    background-image: url("../img/back_login.jpg");
+    background-image: url("../img/back_login_small.jpg");
     width: 100%;
     height: 100%;
 }
